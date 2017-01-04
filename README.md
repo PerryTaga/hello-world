@@ -1,2 +1,4 @@
 # hello-world
-learning how to use github
+
+It's me, Perry.
+Let's work on some stuff!
