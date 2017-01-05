@@ -1,4 +1,4 @@
-var w = 500;
+var w = 720;
 var h = 500;
 var scl = 10;
 var cols = w/scl;
@@ -14,12 +14,12 @@ function setup() {
 }
 
 function draw() {
-	flying -= 0.00;
+	flying -= 0.1;
 	var yoff = flying;
   for (var y = 0; y < rows; y++) {
     var xoff = 0;
     for (var x = 0; x < cols; x++) {
-      terrain[x][y] = map(noise(xoff, yoff), 0, 1, -50, 50);
+      terrain[x][y] = map(noise(xoff, yoff), 0, 1, -75, 75);
       xoff += 0.1;
     }
     yoff += 0.1;
@@ -27,7 +27,7 @@ function draw() {
   background(255);
   
   translate(-(w/2), -(h/3), 0);
-  rotateX(-PI/4);
+  rotateX(-PI/3.25);
  	for(var y = 0; y < (rows-1); y++){
   for(var x = 0; x < (cols-1); x++){
   beginShape(LINES);
@@ -38,6 +38,12 @@ function draw() {
   vertex(((x+1)*scl), ((y+1)*scl), terrain[(x+1)][(y+1)]);
   vertex((x*scl), (y*scl), terrain[x][y]);
   endShape();
+  if(y == 0){	//draws the horizon line on the initial sawtooth
+  	beginShape(LINES);
+    vertex((x*scl), (y*scl), terrain[x][y]);
+    vertex(((x+1)*scl), (y*scl), terrain[(x+1)][y]);
+    endShape();
+  	}
   }
   }
 }
